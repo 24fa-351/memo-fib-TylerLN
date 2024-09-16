@@ -49,13 +49,8 @@ unsigned long long int FibRecursive(int n) {
 
 int main(int argc, char *argv[]) {
    int value = atoi(argv[1]);
-   FILE *text_file = fopen(argv[3], "r");
-   int file_value;
-   fscanf(text_file, "%d", &file_value);
-   fclose(text_file);
 
-
-   int N = value + file_value;
+   int N = value;
 
 
    if (argv[2][0] == 'i') {
