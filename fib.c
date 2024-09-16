@@ -54,10 +54,10 @@ int main(int argc, char *argv[]) {
 
 
    if (argv[2][0] == 'i') {
-      unsigned long long int result = fib_i_wrapper(N);
+      unsigned long long int result = FibIterative(N);
       printf("%llu", result);
    } else if (argv[2][0] == 'r') {
-      unsigned long long int result = fib_r_wrapper(N);
+      unsigned long long int result = FibRecursive(N);
       printf("%llu", result);
    }
    return 0;
