@@ -4,6 +4,8 @@
 
 unsigned long long int memo_array[MEMO_ARRAY_SIZE];
 
+typedef unsigned long long int (*FibFunc)(int);
+
 unsigned long long int fib_i_core(int n) {
   if (n == 1) {
     return 0;
@@ -15,7 +17,7 @@ unsigned long long int fib_i_core(int n) {
   unsigned long long int second = 1;
   unsigned long long int next_value;
 
-  for (int i = 3; i <= n; i++) {
+  for (int ix = 3; ix <= n; ix++) {
     next_value = first + second;
     first = second;
     second = next_value;
@@ -33,41 +35,31 @@ unsigned long long int fib_r_core(int n) {
   }
 }
 
-unsigned long long int FibIterative(int n) {
+unsigned long long int FibMemo(int n, FibFunc chosenFib) {
   if (memo_array[n] != 0) {
     return memo_array[n];
   }
   if (n <= 1) {
     return 0;
   } else if (n == 2) {
-    return 1;
-  }
-  memo_array[n] = fib_i_core(n);
-  return memo_array[n];
-}
-
-unsigned long long int FibRecursive(int n) {
-  if (memo_array[n] != 0) {
-    return memo_array[n];
-  }
-  if (n <= 1) {
     return 0;
-  } else if (n == 2) {
-    return 1;
   }
-  memo_array[n] = fib_r_core(n);
+  memo_array[n] = chosenFib(n);
   return memo_array[n];
 }
 
 int main(int argc, char *argv[]) {
   int user_int = atoi(argv[1]);
+  FibFunc chosenFunc;
+  unsigned long long int result;
 
   if (argv[2][0] == 'i') {
-    unsigned long long int result = FibIterative(user_int);
-    printf("%llu", result);
-  } else if (argv[2][0] == 'r') {
-    unsigned long long int result = FibRecursive(user_int);
-    printf("%llu", result);
+    chosenFunc = fib_i_core;
+  } else if (argv[2][0] = 'r') {
+    chosenFunc = fib_r_core;
   }
+  result = FibMemo(user_int, chosenFunc);
+  printf("%llu", result);
+
   return 0;
 }
