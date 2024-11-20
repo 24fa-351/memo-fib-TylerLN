@@ -4,10 +4,10 @@
 
 unsigned long long int memo_array[MEMO_ARRAY_SIZE];
 
-unsigned long long int fib_i_core(int n) {
-  if (n == 1) {
+unsigned long long int fib_i_core(int f_index) {
+  if (f_index == 1) {
     return 0;
-  } else if (n == 2) {
+  } else if (f_index == 2) {
     return 1;
   }
 
@@ -15,7 +15,7 @@ unsigned long long int fib_i_core(int n) {
   unsigned long long int second = 1;
   unsigned long long int next_value;
 
-  for (int i = 3; i <= n; i++) {
+  for (int ix = 3; ix <= f_index; ix++) {
     next_value = first + second;
     first = second;
     second = next_value;
@@ -23,40 +23,40 @@ unsigned long long int fib_i_core(int n) {
   return second;
 }
 
-unsigned long long int fib_r_core(int n) {
-  if (n == 1) {
+unsigned long long int fib_r_core(int r_index) {
+  if (r_index == 1) {
     return 0;
-  } else if (n == 2) {
+  } else if (r_index == 2) {
     return 1;
   } else {
-    return fib_r_core(n - 1) + fib_r_core(n - 2);
+    return fib_r_core(r_index - 1) + fib_r_core(r_index - 2);
   }
 }
 
-unsigned long long int FibIterative(int n) {
-  if (memo_array[n] != 0) {
-    return memo_array[n];
+unsigned long long int FibIterative(int fib_i) {
+  if (memo_array[fib_i] != 0) {
+    return memo_array[fib_i];
   }
-  if (n <= 1) {
+  if (fib_i <= 1) {
     return 0;
-  } else if (n == 2) {
+  } else if (fib_i == 2) {
     return 1;
   }
-  memo_array[n] = fib_i_core(n);
-  return memo_array[n];
+  memo_array[fib_i] = fib_i_core(fib_i);
+  return memo_array[fib_i];
 }
 
-unsigned long long int FibRecursive(int n) {
-  if (memo_array[n] != 0) {
-    return memo_array[n];
+unsigned long long int FibRecursive(int rec_i) {
+  if (memo_array[rec_i] != 0) {
+    return memo_array[rec_i];
   }
-  if (n <= 1) {
+  if (rec_i <= 1) {
     return 0;
-  } else if (n == 2) {
+  } else if (rec_i == 2) {
     return 1;
   }
-  memo_array[n] = fib_r_core(n);
-  return memo_array[n];
+  memo_array[rec_i] = fib_r_core(rec_i);
+  return memo_array[rec_i];
 }
 
 int main(int argc, char *argv[]) {
