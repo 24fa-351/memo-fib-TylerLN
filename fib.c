@@ -33,7 +33,7 @@ unsigned long long int fib_r_core(int r_index) {
   }
 }
 
-unsigned long long int FibIterative(int fib_i) {
+unsigned long long int fib_iterative(int fib_i) {
   if (memo_array[fib_i] != 0) {
     return memo_array[fib_i];
   }
@@ -46,7 +46,7 @@ unsigned long long int FibIterative(int fib_i) {
   return memo_array[fib_i];
 }
 
-unsigned long long int FibRecursive(int rec_i) {
+unsigned long long int fib_recursive(int rec_i) {
   if (memo_array[rec_i] != 0) {
     return memo_array[rec_i];
   }
@@ -56,18 +56,25 @@ unsigned long long int FibRecursive(int rec_i) {
     return 1;
   }
   memo_array[rec_i] = fib_r_core(rec_i);
+
   return memo_array[rec_i];
 }
 
 int main(int argc, char *argv[]) {
+  if (argc != 3) {
+    printf("Usage: ./fib <number> <i/r>\n");
+    return 1;
+  }
+
   int user_int = atoi(argv[1]);
 
   if (argv[2][0] == 'i') {
-    unsigned long long int result = FibIterative(user_int);
+    unsigned long long int result = fib_iterative(user_int);
     printf("%llu", result);
   } else if (argv[2][0] == 'r') {
-    unsigned long long int result = FibRecursive(user_int);
+    unsigned long long int result = fib_recursive(user_int);
     printf("%llu", result);
   }
+  
   return 0;
 }
